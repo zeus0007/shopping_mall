@@ -1,0 +1,26 @@
+{
+  "name": "todayflower2",
+  "version": "1.0.0",
+  "description": "todayflower2",
+  "author": "zeus",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.1.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "helmet": "^3.21.1",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.7.0"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node init.js --delay 2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
