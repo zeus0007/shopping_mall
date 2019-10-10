@@ -1,14 +1,8 @@
 import app from "./app";
-import { sequelize } from "./models";
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("DB Connection succesfully!!");
-  })
-  .catch(err => {
-    console.log("Fail to DB Connection : ", err);
-  });
+//DB connection
+
+require("./database/connection");
 
 const PORT = 4000;
 

@@ -1,0 +1,14 @@
+<% extend('layout') %>
+
+<h2>판매회원</h2>
+<form action="/join/join_seller" , method="post">
+  <input type="email" name="email" placeholder="사용할 email입력" />
+  <input type="text" name="name" placeholder="이름" />
+  <input type="text" name="address" placeholder="사업장주소" />
+  <input type="text" name="phoneNumber" placeholder="핸드폰 번호" />
+  <input type="text" name="sellerNumber" placeholder="사업자 등록 번호" />
+
+  <input type="password" name="password" placeholder="비밀번호 입력" />
+  <input type="password" name="password2" placeholder="비밀번호 확인" />
+  <button type="submit" value="Login">회원가입</button>
+</form>

@@ -1,8 +1,6 @@
-<h1>hello</h1>
+<% extend('layout') %>
+<h2>Home</h2>
 <div>
-  <form action="/join" , method="post">
-    <input type="email" name="email" placeholder="email입력" />
-    <input type="password" name="password" placeholder="비번 입력" />
-    <button type="submit" value="Join">회원가입</button>
-  </form>
+  <a href="/login">로그인</a>
+  <a href="/join">회원가입</a>
 </div>
