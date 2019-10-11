@@ -2,21 +2,19 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("UserUser", {
+    return queryInterface.createTable("term_buyers", {
       id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
       },
-      useremail: {
-        type: Sequelize.STRING(35),
-        allowNull: false,
-        unique: true
-      },
-      password: {
-        type: Sequelize.STRING(20),
+      term_agree: {
+        type: Sequelize.BOOLEAN,
         allowNull: false
+      },
+      email_agree: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE
@@ -24,6 +22,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("UserUser");
+    return queryInterface.dropTable("term_buyers");
   }
 };

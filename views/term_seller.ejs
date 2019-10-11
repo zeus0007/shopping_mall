@@ -1,20 +1,62 @@
-<% extend('layout') %> <input type="checkbox" name="check1" />모든 약관과
-sms/메일 수신에 동의합니다.
-<div>
-  <div class="term">
-    약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관
-    약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관
-    약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관
-    약관 약관
+<% extend('layout') %>
+
+<form id="formTerm" action="/join/term_seller" method="post">
+  <input type="checkbox" id="checkAll" />모든 약관과 sms/메일 수신에 동의합니다.
+  <div>
+    <div class="term">
+      약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관
+      약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관
+      약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관 약관
+      약관 약관
+    </div>
+    <input
+      type="checkbox"
+      class="chk"
+      id="chk1"
+      name="chk1"
+      value="termChecked"
+    />
+    <div class="term">
+      이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신
+      이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신
+      이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신
+      이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신
+    </div>
+    <input type="checkbox" class="chk" name="chk2" value="emailChecked" />
   </div>
-  <input type="checkbox" name="check2" value="약관에 동의합니다." />
-  <div class="term">
-    이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신
-    이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신
-    이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신
-    이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신 이메일 수신
-  </div>
-  <input type="checkbox" name="check3" value="약관에 동의합니다." />
-</div>
-<a href="/join">이전</a>
-<a href="/join/join_seller">다음</a>
+  <button type="button" id="prev">이전</button>
+  <button type="submit" id="next">다음</button>
+</form>
+<script>
+  //뒤로 가기 버튼 활성화
+  $(document).ready(function() {
+    $("#prev").click(function() {
+      location.href = "/join";
+    });
+    event.preventDefault();
+    $("#formTerm").submit(function() {
+      if ($("input[name=chk1]").prop("checked")) {
+        $("formTerm").submit(function() {
+          return true;
+        });
+      } else {
+        alert("약관의 체크가 필요합니다.");
+        location.href = "/join/term_seller";
+        return false;
+      }
+    });
+
+    //박스 전체 클릭 기능
+    $("#checkAll").click(function() {
+      if ($("#checkAll").prop("checked")) {
+        //checkAll 클릭이 되었으면
+        //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+        $("input[class=chk]").prop("checked", true);
+      } else {
+        //checkAll 클릭이 안되었으면
+        //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+        $("input[class=chk]").prop("checked", false);
+      }
+    });
+  });
+</script>
