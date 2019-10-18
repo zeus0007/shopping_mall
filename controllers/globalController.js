@@ -1,6 +1,5 @@
 import routes from "../routes";
-import { user_buyers } from "../models/UserBuyer";
-import { user_sellers } from "../models/UserSeller";
+import { users } from "../models/User";
 
 export const homeController = (req, res) => {
   res.render("home");
@@ -8,42 +7,32 @@ export const homeController = (req, res) => {
 export const getLoginController = (req, res) => {
   res.render("login");
 };
-export const postLoginController = async (req, res) => {
+export const postLoginController = async (req, res, next) => {
   const {
     body: { email, password }
   } = req;
   try {
-    const Login = await user_buyers.findOne({ where: { user_email: email } });
-
+    const Login = await users.findOne({
+      where: { user_email: email }
+    });
+    console.log("asldfasdf", Login);
     //구매 회원이 아닐경우
     if (Login === null) {
-      const Login2 = await user_sellers.findOne({
-        where: { user_email: email }
-      });
-      if (Login2 === null) {
-        res.status(400);
-        console.log("없는 회원입니다.");
-        res.render(routes.login);
-      } else {
-        const userPassword = Login2.dataValues.password;
-
-        // 비밀번호 일치 확인
-        if (password === userPassword) {
-          console.log("로그인 완료!");
-          res.redirect(routes.home, { Username: Login2.dataValues.name });
-        } else {
-          console.log("비밀번호가 틀렸습니다.");
-          res.redirect(routes.login);
-        }
-      }
+      res.status(400);
+      console.log("없는 회원입니다.");
+      res.redirect(routes.login);
     } else {
-      // 구매 회원일 경우
+      const userPassword = Login.dataValues.password;
       // 비밀번호 일치 확인
-      if (password === Login.dataValues.password) {
+      if (password === userPassword) {
+        req.session.is_logined = true;
+        req.session.name = Login.dataValues.name;
+
         console.log("로그인 완료!");
-        res.render(routes.home, { Username: Login2.dataValues.name });
+        res.redirect(routes.home);
       } else {
         console.log("비밀번호가 틀렸습니다.");
+        alert("비밀번호가 틀렸습니다.");
         res.redirect(routes.login);
       }
     }
@@ -51,4 +40,14 @@ export const postLoginController = async (req, res) => {
     console.log(error);
     res.redirect(routes.login);
   }
+};
+
+export const mypageController = (req, res) => {
+  res.render("mypage");
+};
+
+export const logoutController = (req, res) => {
+  req.session.destroy(function(err) {
+    res.redirect(routes.home);
+  });
 };

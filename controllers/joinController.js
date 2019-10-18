@@ -1,7 +1,6 @@
 import { term_sellers } from "../models/TermSeller";
 import { term_buyers } from "../models/TermBuyer";
-import { user_buyers } from "../models/UserBuyer";
-import { user_sellers } from "../models/UserSeller";
+import { users } from "../models/User";
 import routes from "../routes";
 
 export const joinController = (req, res) => {
@@ -18,18 +17,19 @@ export const postjoinBuyerController = async (req, res, next) => {
   } = req;
   try {
     if (password === password2) {
-      const BuyerUser = await user_buyers.create({
+      const BuyerUser = await users.create({
         user_email: email,
         name,
         password,
         address,
-        phone: phoneNumber
+        phone: phoneNumber,
+        seller_check: 0
       });
       console.log("user에 들어갈 내용", BuyerUser);
       next();
     } else {
       res.status(400);
-      res.render("join_seller");
+      res.render("join_buyer");
     }
   } catch (error) {
     console.log(error);
@@ -55,13 +55,14 @@ export const postJoinSellerController = async (req, res, next) => {
   } = req;
   try {
     if (password === password2) {
-      const sellerUser = await user_sellers.create({
+      const sellerUser = await users.create({
         user_email: email,
         name,
         password,
         seller_number: sellerNumber,
         address,
-        phone: phoneNumber
+        phone: phoneNumber,
+        seller_check: 1
       });
       console.log("user에 들어갈 내용", sellerUser);
       next();

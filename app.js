@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { localsMiddleware } from "./middlewares";
 import path from "path";
+import session from "express-session";
+var MySQLStore = require("express-mysql-session")(session);
 
 import userRouter from "./routers/userRouter";
 import globalRouter from "./routers/globalRouter";
@@ -20,6 +22,20 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: new MySQLStore({
+      host: "localhost",
+      port: 3306,
+      user: "root",
+      password: "",
+      database: "shoppingmall"
+    })
+  })
+);
 
 app.use(localsMiddleware);
 

@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("user_sellers", {
+    return queryInterface.createTable("users", {
       id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -24,7 +24,7 @@ module.exports = {
       },
       seller_number: {
         type: Sequelize.STRING(20),
-        default: false
+        allowNull: false
       },
       address: {
         type: Sequelize.STRING(20),
@@ -34,12 +34,16 @@ module.exports = {
         type: Sequelize.STRING(20),
         allowNull: false
       },
+      seller_check: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE
     });
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("user_sellers");
+    return queryInterface.dropTable("users");
   }
 };

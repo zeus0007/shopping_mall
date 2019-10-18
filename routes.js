@@ -3,6 +3,7 @@ const HOME = "/";
 const JOIN = "/join";
 const LOGIN = "/login";
 const LOGOUT = "/logout";
+const MYPAGE = "/mypage";
 
 //Join
 const JOIN_BUYER = "/join_buyer";
@@ -22,6 +23,7 @@ const routes = {
   term_seller: TERM_SELLER,
   login: LOGIN,
   logout: LOGOUT,
-  users: USERS
+  users: USERS,
+  mypage: MYPAGE
 };
 export default routes;

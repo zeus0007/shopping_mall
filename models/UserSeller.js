@@ -1,7 +1,8 @@
 import Sequelize from "sequelize";
 import sequelize from "../database/connection";
+import passportLocalSequelize from "passport-local-sequelize";
 
-export const user_sellers = sequelize.define("user_sellers", {
+const user_sellers = sequelize.define("user_sellers", {
   id: {
     type: Sequelize.INTEGER(11),
     allowNull: false,
@@ -34,3 +35,10 @@ export const user_sellers = sequelize.define("user_sellers", {
     allowNull: false
   }
 });
+
+passportLocalSequelize.attachToUser(user_sellers, {
+  userEmailField: "user_email",
+  passwordField: "password"
+});
+
+export default user_sellers;
